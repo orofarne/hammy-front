@@ -12,15 +12,20 @@ get '/' do
 end
 
 get '/trigger/:key' do |key|
-    code = ""
-    begin
-        code = cb.get(key)
-    rescue Couchbase::Error::NotFound
-    end
-    haml :editor, :locals => {:key => key, :code => code}
+	haml :editor, :locals => {:key => key}
+end
+
+get '/get_trigger' do
+	code = ""
+	begin
+		code = cb.get(params[:key])
+	rescue Couchbase::Error::NotFound
+	end
+	code
 end
 
 post '/save_trigger' do
-    res = cb.set(params[:key], params[:code])
-    "Saved! #{res}"
+	res = cb.set(params[:key], params[:code])
+	puts "new code for key '#{params[:key]}':\n#{params[:code]}"
+	"Saved! #{res}"
 end

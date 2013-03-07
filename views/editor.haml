@@ -7,31 +7,16 @@
 
   %body
     = "\"#{key}\":"
-    %a{:href => "#", :onClick => "saveCode();"} Save code...
+    %a{:href => "#", :onClick => "saveCodeEx();"} Save code...
     %span#res
-    #editor=code
-    %script{:src => "http://code.jquery.com/jquery-1.9.1.min.js"}
+    #editor
+    %script{:src => "http://code.jquery.com/jquery-1.9.1.min.js", :type => "text/javascript", :charset => "utf-8"}
     %script{:src => "http://d1n0x3qji82z53.cloudfront.net/src-min-noconflict/ace.js", :type => "text/javascript", :charset => "utf-8"}
+    %script{:src => "/js/edit.js", :type => "text/javascript", :charset => "utf-8"}
     %script
       var editor = ace.edit("editor");
       editor.setTheme("ace/theme/solarized_light");
       editor.getSession().setMode("ace/mode/ruby");
-      document.getElementById('editor').style.fontSize='16px';
-      var saveCode = function() {
-      = '  var code = editor.getValue();'
-      = "  var key = '#{key}';"
-      = '  $.ajax({'
-      = '    url: "/save_trigger",'
-      = '    type: "POST",'
-      = '    data: {'
-      = '      key: key,'
-      = '      code: code'
-      = '    },'
-      = '    success: function( data ) {'
-      = '      $("#res").html("<strong>" + data + "</strong>");'
-      = '      setTimeout(function() {'
-      = '        $("#res").html("");'
-      = '      }, 10000);'
-      = '    }'
-      = '  });'
-      }
+      $('#editor').css("fontSize", "16px");
+      loadCode(editor, "#{key}");
+      var saveCodeEx = function() { saveCode(editor, "#{key}"); }
