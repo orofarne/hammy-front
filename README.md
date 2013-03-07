@@ -23,4 +23,4 @@ Couchbase view:
 RUN
 ---
 
-    ./cfg.rb
+    ./hammy-front.rb
