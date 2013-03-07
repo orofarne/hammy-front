@@ -11,6 +11,17 @@ get '/' do
 	haml :index
 end
 
+get '/all_triggers' do
+	keys = []
+
+	hammy = cb.design_docs['hammy']
+	hammy.all_keys.each { |doc|
+		keys << doc.key
+	}
+
+	haml :all_triggers, :locals => {:keys => keys}
+end
+
 get '/trigger/:key' do |key|
 	haml :editor, :locals => {:key => key}
 end

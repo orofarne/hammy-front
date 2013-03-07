@@ -1,0 +1,10 @@
+!!!
+%html
+  %head
+    %title All triggers
+  %body
+    %h1 All triggers
+    %ul
+      - keys.each do |key|
+        %li
+          %a{:href => "/trigger/#{key}"}= key
