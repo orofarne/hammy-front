@@ -4,6 +4,7 @@ require 'sinatra'
 require 'couchbase'
 
 cb = Couchbase.connect(:bucket => "config", :hostname => "localhost")
+sb = Couchbase.connect(:bucket => "state", :hostname => "localhost")
 
 set :haml, :format => :html5
 
@@ -39,4 +40,18 @@ post '/save_trigger' do
 	res = cb.set(params[:key], params[:code])
 	puts "new code for key '#{params[:key]}':\n#{params[:code]}"
 	"Saved! #{res}"
+end
+
+get '/state/:key' do |key|
+	state = []
+	res = sb.get(key)
+	res.each { |k, v|
+		state << {
+			:key => k,
+			:value => v['Value'],
+			:update => Time.at(v['LastUpdate'])
+		}
+	}
+
+	haml :state, :locals => {:state => state, :objectname => key}
 end
