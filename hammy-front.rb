@@ -42,6 +42,17 @@ post '/save_trigger' do
 	"Saved! #{res}"
 end
 
+get '/all_states' do
+	keys = []
+
+	hammy = sb.design_docs['hammy']
+	hammy.all_keys.each { |doc|
+		keys << doc.key
+	}
+
+	haml :all_states, :locals => {:keys => keys}
+end
+
 get '/state/:key' do |key|
 	state = []
 	res = sb.get(key)

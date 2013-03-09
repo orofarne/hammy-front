@@ -8,7 +8,7 @@ Ruby gems:
     gem install sinatra
     gem install couchbase
 
-Couchbase view:
+Couchbase view (for all buckets!):
 
     {
       "_id": "_design/hammy",
