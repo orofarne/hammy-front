@@ -1,7 +1,8 @@
 require 'sinatra/base'
 require 'sinatra/activerecord'
+require 'haml'
 
-require './models/models.rb'
+require_relative 'models/models'
 
 class HammyFront < Sinatra::Base
 	register Sinatra::ActiveRecordExtension
@@ -15,3 +16,5 @@ class HammyFront < Sinatra::Base
 		haml :home, :locals => {:activetab => nil}
 	end
 end
+
+require_relative 'routes/init'
