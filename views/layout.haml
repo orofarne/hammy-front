@@ -1,7 +1,7 @@
 !!!
 %head
   %meta{:charset => "utf-8"}
-  %title Hammy
+  %title Hammy :: #{title}
   -# Le styles
   %link{:href => "/css/bootstrap.min.css", :rel => "stylesheet"}
   %link{:href => "/css/hammy.css", :rel => "stylesheet"}
@@ -11,7 +11,7 @@
   .navbar.navbar-fixed-top
     .navbar-inner
       .container
-        %a.brand{:href => "#"} Hammy
+        %a.brand{:href => "/"} Hammy
         .nav-collapse.collapse
           %ul.nav
             %li.dropdown{:class => (activetab == :view) && "active"}
@@ -27,7 +27,12 @@
                 %li
                   %a{:href => '/tags'} Tags
                 %li
-                  %a{:href => '/objects'} Objects
+                  %a{:href => '/hosts'} Hosts
+                %li.divider
+                %li
+                  %a{:href => '/tags/create'} Create tag
+                %li
+                  %a{:href => '/hosts/create'} Create host
   -# Content
   .container
     =yield

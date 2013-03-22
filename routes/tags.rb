@@ -2,16 +2,17 @@ class HammyFront < Sinatra::Base
 	get '/tags' do
 		tagmap = {}
 
-		Tag.includes(:mobjects).find_each { |tag|
-			mobjects = []
-			tag.mobjects.each { |mobject|
-				mobjects << mobject.name
+		Tag.includes(:hosts).find_each { |tag|
+			hosts = []
+			tag.hosts.each { |host|
+				hosts << host.name
 			}
-			tagmap[tag.name] = mobjects
+			tagmap[tag.name] = hosts
 		}
 
 		haml :tags, :locals => {
 			:activetab => :config,
+			:title => 'Tags',
 			:tagmap => tagmap
 		}
 	end

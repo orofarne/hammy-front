@@ -13,7 +13,10 @@ class HammyFront < Sinatra::Base
 	end
 
 	get '/' do
-		haml :home, :locals => {:activetab => nil}
+		haml :home, :locals => {
+			:activetab => nil,
+			:title => 'Welcome'
+		}
 	end
 end
 

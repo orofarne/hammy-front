@@ -1,11 +1,11 @@
 class CreateTables < ActiveRecord::Migration
 	def up
-		# mobjects (Monitoring OBJECTS)
-		create_table :mobjects do |t|
+		# hosts (Monitoring OBJECTS)
+		create_table :hosts do |t|
 			t.string :name, :null => false
 			t.text :triggercode
 		end
-		add_index :mobjects, :name, :unique => true
+		add_index :hosts, :name, :unique => true
 
 		# tags
 		create_table :tags do |t|
@@ -14,16 +14,16 @@ class CreateTables < ActiveRecord::Migration
 		end
 		add_index :tags, :name, :unique => true
 
-		# mobjectstags
-		create_table :mobjectstags do |t|
-			t.integer :mobject_id, :null => false
+		# hoststags
+		create_table :hoststags do |t|
+			t.integer :host_id, :null => false
 			t.integer :tag_id, :null => false
 		end
 	end
 
 	def down
-		drop_table :mobjects
+		drop_table :hosts
 		drop_table :tags
-		drop_table :mobjectstags
+		drop_table :hoststags
 	end
 end
