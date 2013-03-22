@@ -1,0 +1,6 @@
+adapter: mysql2
+database: hammy
+username: root
+password:
+host: localhost
+port: 3306

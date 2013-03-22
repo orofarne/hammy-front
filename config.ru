@@ -1,3 +1,3 @@
-require "hammy-front"
+require "./app.rb"
 
-run Sinatra::Application
+run HammyFront
