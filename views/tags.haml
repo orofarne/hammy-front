@@ -5,9 +5,9 @@
   - tagmap.each do |tagname, hosts|
     %tr
       %td.span2
-        %a{:href => '#'}
+        %a{:href => "/tags/edit?tagname=#{tagname}"}
           %span.badge.badge-info=tagname
       %td
         - hosts.each do |host|
-          %a{:href => '#'}
+          %a{:href => "/hosts/edit?hostname=#{host}"}
             %span.badge=host

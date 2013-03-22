@@ -1,6 +1,6 @@
 class CreateTables < ActiveRecord::Migration
 	def up
-		# hosts (Monitoring OBJECTS)
+		# hosts (Monitoring objects)
 		create_table :hosts do |t|
 			t.string :name, :null => false
 			t.text :triggercode
@@ -19,6 +19,15 @@ class CreateTables < ActiveRecord::Migration
 			t.integer :host_id, :null => false
 			t.integer :tag_id, :null => false
 		end
+		add_index :hoststags, [:host_id, :tag_id], :unique => true
+
+		# builded triggers (by hosts)
+		create_table :triggers do |t|
+			t.string :obj_key, :null => false
+			t.text :obj_trigger
+			t.timestamps
+		end
+		add_index :triggers, :obj_key, :unique => true
 	end
 
 	def down
