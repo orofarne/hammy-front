@@ -19,6 +19,8 @@
                 View
                 %b.caret
               %ul.dropdown-menu
+                %li
+                  %a{:href => '/charts'} Charts
             %li.dropdown{:class => (activetab == :config) && "active"}
               %a.dropdown-toggle{:href => '#', :'data-toggle' => "dropdown"}
                 Config
@@ -28,15 +30,20 @@
                   %a{:href => '/tags'} Tags
                 %li
                   %a{:href => '/hosts'} Hosts
+                %li
+                  %a{:href => '/generators'} Generators
                 %li.divider
                 %li
                   %a{:href => '/tags/create'} Create tag
                 %li
                   %a{:href => '/hosts/create'} Create host
+                %li
+                  %a{:href => '/generators/create'} Create generator
+
+  -# Le javascript
+  %script{:src => "/js/jquery-1.9.1.min.js", :type => "text/javascript", :charset => "utf-8"}
+  %script{:src => "/js/bootstrap.min.js", :type => "text/javascript", :charset => "utf-8"}
+
   -# Content
   .container
     =yield
-  -# Le javascript
-  -# Placed at the end of the document so the pages load faster
-  %script{:src => "/js/jquery-1.9.1.min.js", :type => "text/javascript", :charset => "utf-8"}
-  %script{:src => "/js/bootstrap.min.js", :type => "text/javascript", :charset => "utf-8"}

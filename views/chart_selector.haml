@@ -1,0 +1,14 @@
+%form{:name => "chart-selector", :method => "GET", :action => "/charts/show"}
+  %fieldset
+    %legend Charts
+    .row
+      .span3
+        %label Hostname
+        %input{:name => "hostname", :type => "text", :placeholder => "hostname"}
+      .span3
+        %label Item
+        %input{:name => "itemkey", :type => "text", :placeholder => "itemkey"}
+      .span3
+        %label Period
+        %input{:name => "period", :type => "text", :placeholder => "period"}
+    %input.btn{:type => "submit", :value => "Show"}

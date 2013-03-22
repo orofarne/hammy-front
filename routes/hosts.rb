@@ -18,7 +18,7 @@ class HammyFront < Sinatra::Base
 	end
 
 	get '/hosts/create' do
-		haml :hosts_create, :locals => {
+		haml :hosts_edit, :locals => {
 			:activetab => :config,
 			:title => 'Create host',
 		}

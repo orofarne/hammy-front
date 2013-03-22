@@ -1,0 +1,13 @@
+%table.table
+  %tr
+    %th.span2 Host
+    %th Tags
+  - hostmap.each do |hostname, tags|
+    %tr
+      %td.span2
+        %a{:href => '#'}
+          %span.badge=hostname
+      %td
+        - tags.each do |tag|
+          %a{:href => '#'}
+            %span.badge.badge-info=tag
