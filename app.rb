@@ -1,6 +1,7 @@
 require 'sinatra/base'
 require 'sinatra/activerecord'
 require 'haml'
+require 'json'
 
 require_relative 'models/models'
 

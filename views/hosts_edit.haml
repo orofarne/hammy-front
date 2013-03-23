@@ -1,11 +1,33 @@
-%form
+%form{:name => 'hostform', :method => 'POST', :action => '/hosts/save'}
   %fieldset
-    %legend Options
+    %legend
+      .row
+        .span10
+          - if hostname.empty?
+            New host
+          - else
+            =hostname
+        .span2{:style => 'text-align: right;'}
+          %input.btn{:type => "submit", :value => "Save"}
     .row
-      .span4
-        %label Name
-        %input#hostname{:type => "text", :placeholder => "hostname"}
+      - if hostname.empty?
+        %input#newhost{:type => "hidden", :name => "newhost", :value => 1}
+        .span4
+          %label Name
+          %input#hostname{:type => "text", :name => "hostname", :placeholder => "hostname"}
+      - else
+        %input#newhost{:type => "hidden", :name => "newhost", :value => 0}
+        %input#hostname{:type => "hidden", :name => "hostname", :value => hostname}
       .span4
         %label Tags
-        %input#tags{:type => "text", :placeholder => "tags"}
+        %input#tags{:type => "text", :name => "tags", :placeholder => "tags", :value => tags}
     %legend Trigger
+    .row
+      .span12#editor
+    %input#code{:type => "hidden", :name => "code", :value => "#{code_json}"}
+
+%script{:src => "/contrib/ace/src-min-noconflict/ace.js", :type => "text/javascript", :charset => "utf-8"}
+%script{:src => "/js/hammy.js", :type => "text/javascript", :charset => "utf-8"}
+%script= p(                                                          |
+  "create_editor();"                                                 |
+  )                                                                  |

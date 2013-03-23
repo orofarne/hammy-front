@@ -2,3 +2,7 @@ body {
   padding-top: 60px;
   background: url("/img/background.png") repeat scroll 0% 0% transparent;
 }
+
+#editor { 
+  height: 300px
+}
