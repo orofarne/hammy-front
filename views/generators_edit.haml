@@ -12,16 +12,20 @@
     .row
       - if generatorname.empty?
         %input#newgenerator{:type => "hidden", :name => "newgenerator", :value => 1}
-        .span4
+        .span3
           %label Name
           %input#generatorname{:type => "text", :name => "generatorname", :placeholder => "generatorname"}
+        .span3
+          %label Reduce host
+          %input#reducehost{:type => "text", :name => "reducehost", :placeholder => "reducehost", :value => reducehost}
       - else
         %input#newgenerator{:type => "hidden", :name => "newgenerator", :value => 0}
         %input#generatorname{:type => "hidden", :name => "generatorname", :value => generatorname}
-      .span4
+        %input#reducehost{:type => "hidden", :name => "reducehost", :value => reducehost}
+      .span3
         %label Tag
         %input#tag{:type => "text", :name => "tag", :placeholder => "tag", :value => tag}
-      .span4
+      .span3
         %label Hostname regexp
         %input#regexp{:type => "text", :name => "regexp", :placeholder => "regexp", :value => regexp}
     .row

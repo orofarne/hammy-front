@@ -3,6 +3,7 @@ class Host < ActiveRecord::Base
 
 	has_many :hoststags
 	has_many :tags, :through => :hoststags
+	has_many :generators
 end
 
 class Tag < ActiveRecord::Base
@@ -22,4 +23,5 @@ class Generator < ActiveRecord::Base
 	attr_accessible :name, :regexp, :mapcode, :reducecode
 
 	belongs_to :tag
+	belongs_to :host
 end

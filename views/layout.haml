@@ -41,13 +41,6 @@
                   %a{:href => '/hosts/create'} Create host
                 %li
                   %a{:href => '/generators/create'} Create generator
-            %li.dropdown{:class => (activetab == :system) && "active"}
-              %a.dropdown-toggle{:href => '#', :'data-toggle' => "dropdown"}
-                System
-                %b.caret
-              %ul.dropdown-menu
-                %li
-                  %a{:href => '/selfstatus'} Status
 
   -# Le javascript
   %script{:src => "/js/jquery-1.9.1.min.js", :type => "text/javascript", :charset => "utf-8"}

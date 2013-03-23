@@ -17,6 +17,7 @@ class HammyFront < Sinatra::Base
 			:activetab => :config,
 			:title => 'Create generator',
 			:generatorname => '',
+			:reducehost => '',
 			:tag => '',
 			:regexp => '',
 			:code_json => JSON.dump({:mapcode => '', :reducecode => ''}),
@@ -35,6 +36,7 @@ class HammyFront < Sinatra::Base
 			:activetab => :config,
 			:title => 'Create generator',
 			:generatorname => g.name,
+			:reducehost => g.host.name,
 			:tag => tagname,
 			:regexp => g.regexp,
 			:code_json => JSON.dump({
@@ -47,15 +49,18 @@ class HammyFront < Sinatra::Base
 	post '/generators/save' do
 		newgenerator = params[:newgenerator].to_i > 0
 		generatorname = params[:generatorname]
+		reducehost = params[:reducehost]
 		tagname = params[:tag]
 		regexp = params[:regexp]
 		code_json = params[:code]
 		code = JSON.parse(code_json)
 
 		ActiveRecord::Base.transaction do
-			t = Tag.find_by_name tagname
+			h = Host.find_by_name(reducehost) or halt 400
+			t = Tag.find_by_name(tagname)
 			if newgenerator then
 				g = Generator.create :name => generatorname, :mapcode => code['mapcode'], :reducecode => code['reducecode']
+				g.host = h
 				g.tag = t if t
 				g.regexp = regexp unless !regexp or regexp.empty?
 				g.save

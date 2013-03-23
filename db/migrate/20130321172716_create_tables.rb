@@ -24,6 +24,7 @@ class CreateTables < ActiveRecord::Migration
 		# generators
 		create_table :generators do |t|
 			t.string :name, :null => false
+			t.integer :host_id
 			t.integer :tag_id
 			t.string :regexp
 			t.text :mapcode
