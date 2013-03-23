@@ -1,0 +1,41 @@
+%form{:name => 'generatorform', :method => 'POST', :action => '/generators/save'}
+  %fieldset
+    %legend
+      .row
+        .span10
+          - if generatorname.empty?
+            New generator
+          - else
+            =generatorname
+        .span2{:style => 'text-align: right;'}
+          %input.btn{:type => "submit", :value => "Save"}
+    .row
+      - if generatorname.empty?
+        %input#newgenerator{:type => "hidden", :name => "newgenerator", :value => 1}
+        .span4
+          %label Name
+          %input#generatorname{:type => "text", :name => "generatorname", :placeholder => "generatorname"}
+      - else
+        %input#newgenerator{:type => "hidden", :name => "newgenerator", :value => 0}
+        %input#generatorname{:type => "hidden", :name => "generatorname", :value => generatorname}
+      .span4
+        %label Tag
+        %input#tag{:type => "text", :name => "tag", :placeholder => "tag", :value => tag}
+      .span4
+        %label Hostname regexp
+        %input#regexp{:type => "text", :name => "regexp", :placeholder => "regexp", :value => regexp}
+    .row
+      .span6
+        %legend Map trigger
+      .span6
+        %legend Reduce trigger
+    .row
+      .editor.span6#mapeditor
+      .editor.span6#reduceditor
+    %input#code{:type => "hidden", :name => "code", :value => "#{code_json}"}
+
+%script{:src => "/contrib/ace/src-min-noconflict/ace.js", :type => "text/javascript", :charset => "utf-8"}
+%script{:src => "/js/hammy.js", :type => "text/javascript", :charset => "utf-8"}
+%script= p(                                                          |
+  "create_gen_editors();"                                            |
+  )                                                                  |
