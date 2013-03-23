@@ -21,6 +21,16 @@ class CreateTables < ActiveRecord::Migration
 		end
 		add_index :hoststags, [:host_id, :tag_id], :unique => true
 
+		# generators
+		create_table :generators do |t|
+			t.string :name, :null => false
+			t.integer :tag_id
+			t.string :regexp
+			t.text :mapcode
+			t.text :reducecode
+		end
+		add_index :generators, :name, :unique => true
+
 		# builded triggers (by hosts)
 		create_table :triggers do |t|
 			t.string :obj_key, :null => false

@@ -3,6 +3,6 @@ body {
   background: url("/img/background.png") repeat scroll 0% 0% transparent;
 }
 
-#editor { 
+.editor { 
   height: 300px
 }
