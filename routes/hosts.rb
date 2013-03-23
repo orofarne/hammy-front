@@ -73,7 +73,7 @@ class HammyFront < Sinatra::Base
 
 		haml :done, :locals => {
 			:activetab => nil,
-			:title => 'Done' + code,
+			:title => 'Done',
 		}
 	end
 end

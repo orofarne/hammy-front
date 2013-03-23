@@ -1,0 +1,30 @@
+%form{:name => 'tagform', :method => 'POST', :action => '/tags/save'}
+  %fieldset
+    %legend
+      .row
+        .span10
+          - if tagname.empty?
+            New tag
+          - else
+            =tagname
+        .span2{:style => 'text-align: right;'}
+          %input.btn{:type => "submit", :value => "Save"}
+    - if tagname.empty?
+      .row
+        %input#newtag{:type => "hidden", :name => "newtag", :value => 1}
+        .span4
+          %label Name
+          %input#tagname{:type => "text", :name => "tagname", :placeholder => "tagname"}
+    -else
+      %input#newtag{:type => "hidden", :name => "newtag", :value => 0}
+      %input#tagname{:type => "hidden", :name => "tagname", :value => tagname}
+    %legend Trigger
+    .row
+      .span12#editor
+    %input#code{:type => "hidden", :name => "code", :value => "#{code_json}"}
+
+%script{:src => "/contrib/ace/src-min-noconflict/ace.js", :type => "text/javascript", :charset => "utf-8"}
+%script{:src => "/js/hammy.js", :type => "text/javascript", :charset => "utf-8"}
+%script= p(                                                          |
+  "create_editor();"                                                 |
+  )                                                                  |
