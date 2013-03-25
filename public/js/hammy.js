@@ -53,8 +53,7 @@ var ts_to_string = function(ts) {
 		+ pad(d.getSeconds())
 }
 
-var draw_state_table = function(data) {
-	var table = JSON.parse(data);
+var draw_state_table = function(table) {
 	var tableHtml = '<table class="table"><tr><th>Key</th><th>Value</th><th>Last updated</th></tr>';
 	for (var key in table) {
 		var elem = table[key];
