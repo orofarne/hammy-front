@@ -41,3 +41,14 @@ var create_gen_editors = function() {
 	mapeditor.getSession().on('change', codeOnChange);
 	reduceditor.getSession().on('change', codeOnChange);
 }
+
+var tsToString = function(ts) {
+	var d = new Date(ts*1000);
+	var pad = function(n){return n<10 ? '0'+n : n}
+	return d.getFullYear()+'-'
+		+ pad(d.getMonth()+1)+'-'
+		+ pad(d.getDate())+' '
+		+ pad(d.getHours())+':'
+		+ pad(d.getMinutes())+':'
+		+ pad(d.getSeconds())
+}

@@ -13,7 +13,7 @@ class HammyFront < Sinatra::Base
 			:activetab => :view,
 			:title => 'State',
 			:hostname => hostname,
-			:dataurl => '/data',
+			:dataurl => '/data/state',
 		}
 	end
 end

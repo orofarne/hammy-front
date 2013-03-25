@@ -17,7 +17,7 @@ class HammyFront < Sinatra::Base
 			:hostname => hostname,
 			:itemkey => itemkey,
 			:period => period,
-			:dataurl => '/data',
+			:dataurl => '/data/values',
 		}
 	end
 end
