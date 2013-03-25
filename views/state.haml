@@ -17,17 +17,7 @@
   "      );"                                                                                       |
   "    },"                                                                                         |
   "    success: function(data, textStatus, jqXHR) {"                                               |
-  "      var table = JSON.parse(data);"                                                            |
-  "      var tableHtml = '<table class=\\'table\\'>' +"                                            |
-  "        '<tr><th>Key</th><th>Value</th><th>Last updated</th></tr>';"                            |
-  "      for (var key in table) {"                                                                 |
-  "        var elem = table[key];"                                                                 |
-  "        var ts = tsToString(elem.LastUpdate);"                                                  |
-  "        tableHtml += '<tr><td>' + key + '</td><td>' +"                                          |
-  "          elem.Value + '</td><td>' + ts + '</td></tr>';"                                        |
-  "      }"                                                                                        |
-  "      tableHtml += '</table>';"                                                                 |
-  "      $('#dataplace').html(tableHtml);"                                                         |
+  "      draw_state_table(data);"                                                                  |
   "    }"                                                                                          |
   "  });"                                                                                          |
   "});")                                                                                           |

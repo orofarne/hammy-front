@@ -42,7 +42,7 @@ var create_gen_editors = function() {
 	reduceditor.getSession().on('change', codeOnChange);
 }
 
-var tsToString = function(ts) {
+var ts_to_string = function(ts) {
 	var d = new Date(ts*1000);
 	var pad = function(n){return n<10 ? '0'+n : n}
 	return d.getFullYear()+'-'
@@ -51,4 +51,16 @@ var tsToString = function(ts) {
 		+ pad(d.getHours())+':'
 		+ pad(d.getMinutes())+':'
 		+ pad(d.getSeconds())
+}
+
+var draw_state_table = function(data) {
+	var table = JSON.parse(data);
+	var tableHtml = '<table class="table"><tr><th>Key</th><th>Value</th><th>Last updated</th></tr>';
+	for (var key in table) {
+		var elem = table[key];
+		var ts = ts_to_string(elem.LastUpdate);
+		tableHtml += '<tr><td>' + key + '</td><td>' + elem.Value + '</td><td>' + ts + '</td></tr>';
+	}
+	tableHtml += '</table>';
+	$('#dataplace').html(tableHtml);
 }
