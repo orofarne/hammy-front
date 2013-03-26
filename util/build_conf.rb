@@ -37,7 +37,7 @@ ActiveRecord::Base.transaction do
 			trigger << format_trigger_code(host.triggercode) if host.triggercode
 		}
 
-		Trigger.create! :obj_key => host.name, :obj_trigger => trigger unless trigger.empty?
+		Trigger.create! :host => host.name, :trigger => trigger unless trigger.empty?
 	}
 
 	Generator.find_each { |gen|
@@ -59,18 +59,18 @@ ActiveRecord::Base.transaction do
 		found = false
 		Host.find_by_sql([sqlq, *sql_args]).each { |h|
 			trigger = format_trigger_code(gen.mapcode)
-			t = Trigger.find_by_obj_key(h.name) or Trigger.create(:obj_key => h.name)
-			t.obj_trigger = '' unless t.obj_trigger
-			t.obj_trigger << trigger
+			t = Trigger.find_by_host(h.name) or Trigger.create(:host => h.name)
+			t.trigger = '' unless t.trigger
+			t.trigger << trigger
 			t.save
 			found = true
 		}
 
 		if found then
 			trigger = format_trigger_code(gen.reducecode)
-			t = Trigger.find_by_obj_key(gen.host.name) or Trigger.create(:obj_key => gen.host.name)
-			t.obj_trigger = '' unless t.obj_trigger
-			t.obj_trigger << trigger
+			t = Trigger.find_by_host(gen.host.name) or Trigger.create(:host => gen.host.name)
+			t.trigger = '' unless t.trigger
+			t.trigger << trigger
 			t.save
 		end
 	}

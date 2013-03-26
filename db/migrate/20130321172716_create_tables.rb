@@ -34,11 +34,11 @@ class CreateTables < ActiveRecord::Migration
 
 		# builded triggers (by hosts)
 		create_table :triggers do |t|
-			t.string :obj_key, :null => false
-			t.text :obj_trigger
+			t.string :host, :null => false
+			t.text :trigger
 			t.timestamps
 		end
-		add_index :triggers, :obj_key, :unique => true
+		add_index :triggers, :host, :unique => true
 	end
 
 	def down
