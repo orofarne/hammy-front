@@ -1,8 +1,9 @@
 %legend=hostname
 %pre
   %code
-    :escaped
-      #{code}
+    = preserve do
+      :escaped
+        #{code}
 
 %link{:rel => "stylesheet", :href => "/css/xcode.css"}
 %script{:src => "/js/highlight.pack.js"}

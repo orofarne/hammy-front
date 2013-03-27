@@ -35,7 +35,7 @@ ActiveRecord::Base.transaction do
 				trigger << format_trigger_code(tag.triggercode)
 			end
 		}
-		trigger << format_trigger_code(host.triggercode) if host.triggercode
+		trigger << format_trigger_code(host.triggercode) if host.triggercode and not host.triggercode.empty?
 
 		Trigger.create! :host => host.name, :trigger => trigger unless trigger.empty?
 	}
