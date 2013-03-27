@@ -114,7 +114,7 @@ var draw_vis_chart = function(cfg) {
 				key: cfg.itemkey
 			},
 			filters: [
-				{ name: 'i-average-filter', step: 600 }
+				{ name: 'i-average-filter', step: Math.round(cfg.period / 72) }
 			],
 			color: '#c00'
 		});
