@@ -77,7 +77,13 @@ var draw_vis_chart = function(cfg) {
 			}
 		],
 		xAxes: [
-			{ rangeProvider: { name: 'i-time-range-provider' }, units: 'unixtime' }
+			{
+				rangeProvider: { name: 'i-time-range-provider' },
+				units: 'unixtime',
+				processors: [
+					{ name: 'i-average-processor', factor: 0.25 }
+				]
+			}
 		],
 		yAxes: [
 			{ rangeProvider: { name: 'i-data-range-provider', min: -1, max: 1 } }
