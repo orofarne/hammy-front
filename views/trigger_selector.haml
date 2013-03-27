@@ -1,0 +1,8 @@
+%form{:name => "trigger-selector", :method => "GET", :action => "/triggers/show"}
+  %fieldset
+    %legend Triggers
+    .row
+      .span3
+        %label Hostname
+        %input{:name => "hostname", :type => "text", :placeholder => "hostname"}
+    %input.btn{:type => "submit", :value => "Show"}

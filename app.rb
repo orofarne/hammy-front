@@ -4,6 +4,7 @@ require 'haml'
 require 'json'
 
 require_relative 'models/models'
+require_relative 'models/trigger'
 
 class HammyFront < Sinatra::Base
 	register Sinatra::ActiveRecordExtension
