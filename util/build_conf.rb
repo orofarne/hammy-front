@@ -5,7 +5,6 @@ require 'yaml'
 require 'logger'
 
 require_relative '../models/models.rb'
-require_relative '../models/trigger.rb'
 
 dbconfig = YAML::load(File.open(File.join(File.dirname(__FILE__), '..', 'config', 'database.yml')))
 
@@ -60,18 +59,16 @@ ActiveRecord::Base.transaction do
 		Host.find_by_sql([sqlq, *sql_args]).each { |h|
 			trigger = format_trigger_code(gen.mapcode)
 			t = Trigger.find_by_host(h.name) or Trigger.create(:host => h.name)
-			t.trigger = '' unless t.trigger
-			t.trigger << trigger
-			t.save
+			t.trigger = t.trigger.to_s + trigger
+			t.save!
 			found = true
 		}
 
 		if found then
 			trigger = format_trigger_code(gen.reducecode)
 			t = Trigger.find_by_host(gen.host.name) or Trigger.create(:host => gen.host.name)
-			t.trigger = '' unless t.trigger
-			t.trigger << trigger
-			t.save
+			t.trigger = t.trigger.to_s + trigger
+			t.save!
 		end
 	}
 end

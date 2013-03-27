@@ -25,3 +25,7 @@ class Generator < ActiveRecord::Base
 	belongs_to :tag
 	belongs_to :host
 end
+
+class Trigger < ActiveRecord::Base
+	attr_accessible :host, :trigger
+end
