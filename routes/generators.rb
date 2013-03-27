@@ -26,7 +26,7 @@ class HammyFront < Sinatra::Base
 
 	get '/generators/edit' do
 		generatorname = params[:generatorname]
-		halt 400 if not generatorname or generatorname.empty?
+		halt 400 if !generatorname || generatorname.empty?
 
 		g = Generator.find_by_name(generatorname) or halt 404
 		tagname = ''
@@ -62,13 +62,13 @@ class HammyFront < Sinatra::Base
 				g = Generator.create :name => generatorname, :mapcode => code['mapcode'], :reducecode => code['reducecode']
 				g.host = h
 				g.tag = t if t
-				g.regexp = regexp unless !regexp or regexp.empty?
+				g.regexp = regexp unless !regexp || regexp.empty?
 				g.save
 			else
 				g = Generator.find_by_name(generatorname) or halt 404
 				g.tag = t
 				g.regexp = nil
-				g.regexp = regexp unless !regexp or regexp.empty?
+				g.regexp = regexp unless !regexp || regexp.empty?
 				g.mapcode = code['mapcode']
 				g.reducecode = code['reducecode']
 				g.save

@@ -28,7 +28,7 @@ class HammyFront < Sinatra::Base
 
 	get '/tags/edit' do
 		tagname = params[:tagname]
-		halt 400 if not tagname or tagname.empty?
+		halt 400 if !tagname || tagname.empty?
 
 		tag = Tag.find_by_name(tagname) or halt 404
 

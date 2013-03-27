@@ -58,7 +58,7 @@ ActiveRecord::Base.transaction do
 		found = false
 		Host.find_by_sql([sqlq, *sql_args]).each { |h|
 			trigger = format_trigger_code(gen.mapcode)
-			t = Trigger.find_by_host(h.name) or Trigger.create(:host => h.name)
+			t = Trigger.find_by_host(h.name) || Trigger.create(:host => h.name)
 			t.trigger = t.trigger.to_s + trigger
 			t.save!
 			found = true
@@ -66,7 +66,7 @@ ActiveRecord::Base.transaction do
 
 		if found then
 			trigger = format_trigger_code(gen.reducecode)
-			t = Trigger.find_by_host(gen.host.name) or Trigger.create(:host => gen.host.name)
+			t = Trigger.find_by_host(gen.host.name) || Trigger.create(:host => gen.host.name)
 			t.trigger = t.trigger.to_s + trigger
 			t.save!
 		end

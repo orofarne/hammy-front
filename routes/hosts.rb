@@ -29,7 +29,7 @@ class HammyFront < Sinatra::Base
 
 	get '/hosts/edit' do
 		hostname = params[:hostname]
-		halt 400 if not hostname or hostname.empty?
+		halt 400 if !hostname || hostname.empty?
 
 		host = Host.find_by_name(hostname) or halt 404
 
