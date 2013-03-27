@@ -18,6 +18,7 @@ class HammyFront < Sinatra::Base
 			:itemkey => itemkey,
 			:period => period,
 			:dataurl => '/data/values',
+			:avgline => (period > 3600),
 		}
 	end
 end

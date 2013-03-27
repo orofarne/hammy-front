@@ -2,56 +2,17 @@
 
 %link{:rel => "stylesheet", :type => "text/css", :href => "/contrib/vis/vis.css"}
 %script{:src => "/contrib/vis/vis.js"}
+%script{:src => "/js/hammy.js"}
 
-%script= p(                                                                                  |
-  "$(function() {"                                                                           |
-  "  console.log(Units.format(+new Date()/1000, 'unixtime'));"                               |
-  ""                                                                                         |
-  "  Vis("                                                                                   |
-  "      {"                                                                                  |
-  "          $object: $('.b-chart'),"                                                        |
-  "          tAxes: ["                                                                       |
-  "              {"                                                                          |
-  "                  rangeProvider: {"                                                       |
-  "                      name: 'i-current-time-range-provider',"                             |
-  "                      period: #{period},"                                                 |
-  "                      delay: 10000"                                                       |
-  "                  },"                                                                     |
-  "              }"                                                                          |
-  "          ],"                                                                             |
-  "          xAxes: ["                                                                       |
-  "              { rangeProvider: { name: 'i-time-range-provider' }, units: 'unixtime' }"    |
-  "          ],"                                                                             |
-  "          yAxes: ["                                                                       |
-  "              { rangeProvider: { name: 'i-data-range-provider', min: -1, max: 1 } }"      |
-  "          ],"                                                                             |
-  "          items: ["                                                                       |
-  "              {"                                                                          |
-  "                  dataProvider: {"                                                        |
-  "                      name: 'i-hammy-data-provider',"                                     |
-  "                      url: '#{dataurl}',"                                                 |
-  "                      host: '#{hostname}',"                                               |
-  "                      key: '#{itemkey}'"                                                  |
-  "                  },"                                                                     |
-  "              }"                                                                          |
-  "          ],"                                                                             |
-  "          overlays: ["                                                                    |
-  "              { name: 'b-grid-overlay' },"                                                |
-  "              { name: 'b-render-overlay' },"                                              |
-  "              { name: 'b-tooltip-overlay' }"                                              |
-  "          ]"                                                                              |
-  "      },"                                                                                 |
-  "      'b-chart'"                                                                          |
-  "  );"                                                                                     |
-  ""                                                                                         |
-  "  TaskScheduler.run("                                                                     |
-  "      TaskScheduler.PRIO_DATA,"                                                           |
-  "      ["                                                                                  |
-  "          function() { console.log('step1', arguments); this.next() },"                   |
-  "          function() { console.log('step2', arguments); this.next() }"                    |
-  "      ],"                                                                                 |
-  "      { args: [1, 2, 3] }"                                                                |
-  "  );"                                                                                     |
-  "});")                                                                                     |
+%script= p(                                                                                 |
+  "$(function() {"                                                                          |
+  "  draw_vis_chart({"                                                                      |
+  "    period: #{period},"                                                                  |
+  "    dataurl: '#{dataurl}',"                                                              |
+  "    hostname: '#{hostname}',"                                                            |
+  "    itemkey: '#{itemkey}',"                                                              |
+  "    avgline: #{avgline}"                                                                 |
+  "  });"                                                                                   |
+  "});")                                                                                    |
 
 .b-chart

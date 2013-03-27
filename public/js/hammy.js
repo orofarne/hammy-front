@@ -63,3 +63,56 @@ var draw_state_table = function(table) {
 	tableHtml += '</table>';
 	$('#dataplace').html(tableHtml);
 }
+
+var draw_vis_chart = function(cfg) {
+	var params = {
+		$object: $('.b-chart'),
+		tAxes: [
+			{
+				rangeProvider: {
+					name: 'i-current-time-range-provider',
+					period: cfg.period,
+					delay: 10000
+				},
+			}
+		],
+		xAxes: [
+			{ rangeProvider: { name: 'i-time-range-provider' }, units: 'unixtime' }
+		],
+		yAxes: [
+			{ rangeProvider: { name: 'i-data-range-provider', min: -1, max: 1 } }
+		],
+		items: [
+			{
+				dataProvider: {
+					name: 'i-hammy-data-provider',
+					url: cfg.dataurl,
+					host: cfg.hostname,
+					key: cfg.itemkey
+				},
+			}
+		],
+		overlays: [
+			{ name: 'b-grid-overlay' },
+			{ name: 'b-render-overlay' },
+			{ name: 'b-tooltip-overlay' }
+		]
+	};
+
+	if (cfg.avgline) {
+		params.items.push({
+			dataProvider: {
+				name: 'i-hammy-data-provider',
+				url: cfg.dataurl,
+				host: cfg.hostname,
+				key: cfg.itemkey
+			},
+			filters: [
+				{ name: 'i-average-filter', step: 600 }
+			],
+			color: '#c00'
+		});
+	}
+
+	Vis(params, 'b-chart');
+}
