@@ -27,6 +27,8 @@ end
 ActiveRecord::Base.transaction do
 	Trigger.delete_all
 
+	triggers = {}
+
 	Host.includes(:tags).find_each { |host|
 		trigger = ""
 		host.tags.each { |tag|
@@ -36,7 +38,7 @@ ActiveRecord::Base.transaction do
 		}
 		trigger << format_trigger_code(host.triggercode) if host.triggercode and not host.triggercode.empty?
 
-		Trigger.create! :host => host.name, :trigger => trigger unless trigger.empty?
+		triggers[host.name] = trigger unless trigger.empty?
 	}
 
 	Generator.find_each { |gen|
@@ -57,18 +59,16 @@ ActiveRecord::Base.transaction do
 
 		found = false
 		Host.find_by_sql([sqlq, *sql_args]).each { |h|
-			trigger = format_trigger_code(gen.mapcode)
-			t = Trigger.find_by_host(h.name) || Trigger.create(:host => h.name)
-			t.trigger = t.trigger.to_s + trigger
-			t.save!
+			triggers[h.name] = triggers[h.name].to_s + format_trigger_code(gen.mapcode)
 			found = true
 		}
 
 		if found then
-			trigger = format_trigger_code(gen.reducecode)
-			t = Trigger.find_by_host(gen.host.name) || Trigger.create(:host => gen.host.name)
-			t.trigger = t.trigger.to_s + trigger
-			t.save!
+			triggers[gen.host.name] = triggers[gen.host.name].to_s + format_trigger_code(gen.reducecode)
 		end
+	}
+
+	triggers.each { |h, t|
+		Trigger.create! :host => h, :trigger => t
 	}
 end
