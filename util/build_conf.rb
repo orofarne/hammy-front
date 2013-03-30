@@ -32,11 +32,11 @@ ActiveRecord::Base.transaction do
 	Host.includes(:tags).find_each { |host|
 		trigger = ""
 		host.tags.each { |tag|
-			if tag.triggercode and not tag.triggercode.empty? then
+			if tag.triggercode and !tag.triggercode.empty? then
 				trigger << format_trigger_code(tag.triggercode)
 			end
 		}
-		trigger << format_trigger_code(host.triggercode) if host.triggercode and not host.triggercode.empty?
+		trigger << format_trigger_code(host.triggercode) if host.triggercode and !host.triggercode.empty?
 
 		triggers[host.name] = trigger unless trigger.empty?
 	}
@@ -50,12 +50,12 @@ ActiveRecord::Base.transaction do
 			where_sql << ' ht.tag_id = ?'
 			sql_args << gen.tag.id
 		end
-		if gen.regexp and not gen.regexp.empty? then
+		if gen.regexp and !gen.regexp.empty? then
 			where_sql << ' AND' unless where_sql.empty?
 			where_sql << ' h.name REGEXP ?'
 			sql_args << "^#{gen.regexp}$"
 		end
-		sqlq << ' WHERE' << where_sql if not where_sql.empty?
+		sqlq << ' WHERE' << where_sql if !where_sql.empty?
 
 		found = false
 		Host.find_by_sql([sqlq, *sql_args]).each { |h|

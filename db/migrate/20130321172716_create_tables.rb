@@ -3,14 +3,14 @@ class CreateTables < ActiveRecord::Migration
 		# hosts (Monitoring objects)
 		create_table :hosts do |t|
 			t.string :name, :null => false
-			t.text :triggercode
+			t.text :triggercode, :limit => 2**16+1
 		end
 		add_index :hosts, :name, :unique => true
 
 		# tags
 		create_table :tags do |t|
 			t.string :name, :null => false
-			t.text :triggercode
+			t.text :triggercode, :limit => 2**16+1
 		end
 		add_index :tags, :name, :unique => true
 
@@ -27,15 +27,15 @@ class CreateTables < ActiveRecord::Migration
 			t.integer :host_id
 			t.integer :tag_id
 			t.string :regexp
-			t.text :mapcode
-			t.text :reducecode
+			t.text :mapcode, :limit => 2**16+1
+			t.text :reducecode, :limit => 2**16+1
 		end
 		add_index :generators, :name, :unique => true
 
 		# builded triggers (by hosts)
 		create_table :triggers do |t|
 			t.string :host, :null => false
-			t.text :trigger
+			t.text :trigger, :limit => 2**16+1
 			t.timestamps
 		end
 		add_index :triggers, :host, :unique => true
