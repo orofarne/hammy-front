@@ -12,7 +12,7 @@ ActiveRecord::Base.logger = Logger.new(STDERR)
 ActiveRecord::Base.establish_connection(dbconfig)
 
 def format_trigger_code(code)
-	trigger = "begin\n"
+	trigger = "{\n"
 	code.each_line { |l|
 		if l.ends_with? "\n" then
 			trigger << "\t#{l}"
@@ -20,7 +20,7 @@ def format_trigger_code(code)
 			trigger << "\t#{l}\n"
 		end
 	}
-	trigger << "end\n\n"
+	trigger << "}\n\n"
 	return trigger
 end
 
