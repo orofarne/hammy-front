@@ -1,7 +1,7 @@
 var create_editor = function() {
 	var editor = ace.edit("editor");
 	editor.setTheme("ace/theme/xcode");
-	editor.getSession().setMode("ace/mode/ruby");
+	editor.getSession().setMode("ace/mode/javascript");
 	var code = JSON.parse($('#code').val());
 	editor.setValue(code.code);
 	editor.getSession().getSelection().clearSelection();
@@ -17,10 +17,10 @@ var create_editor = function() {
 var create_gen_editors = function() {
 	var mapeditor = ace.edit("mapeditor");
 	mapeditor.setTheme("ace/theme/xcode");
-	mapeditor.getSession().setMode("ace/mode/ruby");
+	mapeditor.getSession().setMode("ace/mode/javascript");
 	var reduceditor = ace.edit("reduceditor");
 	reduceditor.setTheme("ace/theme/xcode");
-	reduceditor.getSession().setMode("ace/mode/ruby");
+	reduceditor.getSession().setMode("ace/mode/javascript");
 
 	var code = JSON.parse($('#code').val());
 
