@@ -1,0 +1,42 @@
+%form{:name => 'screenform', :method => 'POST', :action => '/screens/save'}
+  %fieldset
+    %legend
+      .row
+        .span10
+          - if slug.empty?
+            New screen
+          - else
+            =slug
+        .span2{:style => 'text-align: right;'}
+          %input.btn{:type => "submit", :value => "Save"}
+    .row
+      - if slug.empty?
+        %input#newscreen{:type => "hidden", :name => "newscreen", :value => 1}
+        .span3
+          %label Slug
+          %input#slug{:type => "text", :name => "slug", :placeholder => "my-first-screen"}
+        .span9
+          %label Name
+          %input#name{:type => "text", :name => "name", :placeholder => "My First Screen", :value => name}
+      - else
+        %input#newscreen{:type => "hidden", :name => "newgenerator", :value => 0}
+        %input#slug{:type => "hidden", :name => "slug", :value => slug}
+        .span12
+          %label Name
+          %input#name{:type => "text", :name => "name", :placeholder => "My First Screen", :value => name}
+    .row
+      .span12
+        %legend Attributes
+        .editor.small#attrseditor
+    .row
+      .span12
+        %legend Content
+        .editor#contenteditor
+    %input#attrs{:type => "hidden", :name => "attrs", :value => "#{attrs_json}"}
+    %input#content{:type => "hidden", :name => "content", :value => "#{content_json}"}
+
+%script{:src => "/contrib/ace/src-min-noconflict/ace.js", :type => "text/javascript", :charset => "utf-8"}
+%script{:src => "/js/hammy.js", :type => "text/javascript", :charset => "utf-8"}
+%script= p(                                                          |
+  "create_screen_editors();"                                         |
+  )                                                                  |

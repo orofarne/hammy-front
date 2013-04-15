@@ -42,6 +42,27 @@ var create_gen_editors = function() {
 	reduceditor.getSession().on('change', codeOnChange);
 }
 
+var create_screen_editors = function() {
+	var initEditor = function(id, mode) {
+		var editor = ace.edit(id + "editor");
+		editor.setTheme("ace/theme/xcode");
+		editor.getSession().setMode("ace/mode/" + mode);
+
+		var code = $('#' + id).val();
+		editor.setValue(code);
+		editor.getSession().getSelection().clearSelection();
+
+		var codeOnChange = function(e) {
+			var code = editor.getValue();
+			$('#' + id).val(code);
+		}
+		editor.getSession().on('change', codeOnChange);
+	}
+
+	initEditor('attrs', 'json');
+	initEditor('content', 'json');
+}
+
 var ts_to_string = function(ts) {
 	var d = new Date(ts*1000);
 	var pad = function(n){return n<10 ? '0'+n : n}
@@ -121,4 +142,65 @@ var draw_vis_chart = function(cfg) {
 	}
 
 	Vis(params, 'b-chart');
+}
+
+var draw_screen = function(cfg, attrs, content) {
+	var $container = $('body > .container');
+	$.each(content, function() {
+		var chart = this;
+		var items = {};
+		var params = {
+			tAxes: [
+				{
+					rangeProvider: { name: 'i-current-time-range-provider', period: cfg.period, delay: 10000 }
+				}
+			],
+			xAxes: [
+				{
+					rangeProvider: { name: 'i-time-range-provider' },
+					units: 'unixtime',
+					processors: [
+						{ name: 'i-average-processor', factor: 0.25 }
+					]
+				}
+			],
+			items: [],
+			yAxes: [
+				{
+					rangeProvider: { name: 'i-data-range-provider' }
+				}
+			],
+			overlays: [
+				{ name: 'b-grid-overlay' },
+				{ name: 'b-render-overlay' },
+				{ name: 'b-tooltip-overlay' }
+			]
+		};
+		$.each(chart, function() {
+			var item = this;
+			(items[item.hostname] || (items[item.hostname] = [])).push(item.itemkey);
+			params.items.push({
+				dataProvider: {
+					name: 'i-hammy-data-provider',
+					url: cfg.dataurl,
+					host: item.hostname,
+					key: item.itemkey
+				},
+				color: item.color
+			});
+		});
+		var hosts = [];
+		$.each(items, function(hostname) {
+			hosts.push(hostname + " :: " + this.join(", "));
+		});
+		var title = hosts.join("; ");
+
+		var $title = $('<legend>', { text: title });
+		$container.append($title);
+		var $object = $('<div>');
+		$container.append($object);
+
+		params.$object = $object;
+		Vis(params, 'b-chart');
+	});
 }

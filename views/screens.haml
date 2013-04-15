@@ -1,0 +1,11 @@
+%table.table
+  %tr
+    %th{:colspan => 2, :class => "span2"}=Screen
+  - screenlist.each do |s|
+    %tr
+      %td.span9
+        %a{:href => "/screens/show?slug=#{s[:slug]}"}
+          =s[:name]
+      %td.span3
+        %a{:href => "/screens/edit?slug=#{s[:slug]}"}
+          %span.badge=s[:slug]

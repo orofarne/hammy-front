@@ -40,3 +40,11 @@ class Trigger < ActiveRecord::Base
 	validates_length_of :host, :minimum => 2, :maximum => 255
 	validates_format_of :host, :with => /^[0-9A-Za-z_][0-9A-Za-z\-_\.]*[0-9A-Za-z_]$/
 end
+
+class Screen < ActiveRecord::Base
+	attr_accessible :slug, :name, :attrs, :content
+
+	validates_length_of :name, :minimum => 2, :maximum => 255
+	validates_length_of :slug, :minimum => 2, :maximum => 255
+	validates_format_of :slug, :with => /^[0-9A-Za-z_][0-9A-Za-z\-_\.]*[0-9A-Za-z_]$/
+end

@@ -1,0 +1,5 @@
+%link{:rel => "stylesheet", :type => "text/css", :href => "/contrib/vis/vis.css"}
+%script{:src => "/contrib/vis/vis.js"}
+%script{:src => "/js/hammy.js"}
+
+%script= p("$(function() { draw_screen(#{cfg}, #{attrs}, #{content}); });")
