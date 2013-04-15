@@ -6,3 +6,7 @@ body {
 .editor { 
   height: 300px
 }
+
+.editor.small {
+  height: 100px
+}
